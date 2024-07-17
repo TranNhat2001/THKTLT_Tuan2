@@ -45,7 +45,18 @@ void interchangeSort(int a[], int n, bool ascending) {
 		}
 	}
 }
-
+// Hàm sắp xếp giảm dần bằng giải thuật Interchange Sort
+void interchangeSort2(int a[], int n, bool ascending) {
+	for (int i = 0; i < n - 1; ++i) {
+		for (int j = i + 1; j < n; ++j) {
+			if ((ascending && a[i] < a[j]) || (!ascending && a[i] > a[j])) {
+				int temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+		}
+	}
+}
 // Hàm tìm kiếm nhị phân x trong mảng đã sắp xếp tăng dần
 bool binarySearch(const int a[], int n, int x, int &position) {
 	int left = 0, right = n - 1;
@@ -149,17 +160,20 @@ void main() {
 		printf("\nKhong tim thay %d trong mang", x);
 	}
 
-	// Sắp xếp mảng a tăng dần bằng Interchange Sort và in ra kết quả
+	// Sắp xếp mảng a tăng/giảm dần bằng Interchange Sort
 	interchangeSort(a, n, true);
-	printf("\nMang sau khi sap xep tang dan: ");
+	printf("\nMang sau khi sap xep tang dan(Interchange Sort): ");
+	printArray(a, n);
+	interchangeSort2(a, n, true);
+	printf("\nMang sau khi sap xep giam dan(Interchange Sort): ");
 	printArray(a, n);
 
 	// Tìm kiếm nhị phân số 50 trong mảng a đã sắp xếp tăng dần
 	if (binarySearch(a, n, x, position)) {
-		printf("\nTim thay %d tai vi tri %d", x,  position);
+		printf("\nTim thay %d tai vi tri %d trong mang da sap xep tang len", x, position);
 	}
 	else {
-		printf("\nKhong tim thay %d trong mang.", x);
+		printf("\nKhong tim thay %d trong mang da sap xep tang len.", x);
 	}
 
 	// Sắp xếp mảng a tăng dần bằng Selection Sort và in ra kết quả
